@@ -28,3 +28,9 @@ TEAMS_APP_TENANT_ID=
 ```
 SECRET_BOT_PASSWORD=
 ```
+
+## Labs
+
+- *01* Basic Bot
+- *02* Teams AI Basic Bot
+- *03* Azurite Storage
