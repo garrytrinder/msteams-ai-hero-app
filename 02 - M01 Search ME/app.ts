@@ -1,5 +1,6 @@
 import { Application, DefaultTurnState } from '@microsoft/teams-ai';
 import { ActivityTypes, MemoryStorage, TurnContext } from 'botbuilder';
+import SupplierME from './messageExtensions/supplierME';
 
 interface ConversationState {
     count: number;
@@ -24,5 +25,10 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
     // Echo back users request
     await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
 });
+
+app.messageExtensions.query('supplierQuery',  async (context: TurnContext, state: ApplicationTurnState, query:Query<Record<string>>) => {
+});
+
+SupplierME.handleTeamsMessagingExtensionQuery);
 
 export default app;

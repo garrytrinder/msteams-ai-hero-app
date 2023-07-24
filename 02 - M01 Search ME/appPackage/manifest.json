@@ -34,7 +34,31 @@
             "commandLists": []
         }
     ],
-    "composeExtensions": [],
+    "composeExtensions": [
+        {
+            "botId": "${{BOT_ID}}",
+            "commands": [
+                {
+                    "id": "searchQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Look up a Northwind supplier",
+                    "title": "Supplier search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "searchQuery",
+                            "title": "Supplier search",
+                            "description": "Look up a Northwind supplier",
+                            "inputType": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "configurableTabs": [],
     "staticTabs": [],
     "permissions": [
