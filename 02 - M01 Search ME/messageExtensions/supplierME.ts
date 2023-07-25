@@ -14,7 +14,7 @@ interface NorthwindSupplierData {
 export const meType = "supplierME";
 
 // Get suppliers given a query
-export async function query (context: TurnContext, query: Query<Record<string, any>>):
+export async function query<T> (context: TurnContext, state: T, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> {
 
         try {

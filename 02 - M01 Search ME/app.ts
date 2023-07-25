@@ -27,11 +27,7 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
     await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
 });
 
-app.messageExtensions.query('supplierQuery',
-    (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
-        Promise<MessagingExtensionResult> => {
-        return SupplierME.query(context, query);
-    });
+app.messageExtensions.query('supplierQuery', SupplierME.query<ApplicationTurnState>);
 
 app.messageExtensions.query('customerQuery',
     (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
