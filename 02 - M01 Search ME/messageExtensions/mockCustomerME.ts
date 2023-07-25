@@ -14,7 +14,7 @@ interface NorthwindSupplierData {
 class CustomerME {
 
     // Get suppliers given a query
-    async handleTeamsMessagingExtensionQuery (context: TurnContext, query: Query<Record<string, any>>):
+    async query (context: TurnContext, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> {
 
         try {
@@ -71,7 +71,7 @@ class CustomerME {
         }
     };
 
-    async handleTeamsMessagingExtensionSelectItem (context: TurnContext, selectedValue: any):
+    async selectItem (context: TurnContext, selectedValue: any):
         Promise<MessagingExtensionResult> {
 
         // Read card from JSON file

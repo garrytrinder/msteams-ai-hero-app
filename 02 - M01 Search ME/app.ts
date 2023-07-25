@@ -30,23 +30,23 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
 app.messageExtensions.query('supplierQuery',
     (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> => {
-        return SupplierME.handleTeamsMessagingExtensionQuery(context, query);
+        return SupplierME.query(context, query);
     });
 
 app.messageExtensions.query('customerQuery',
     (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> => {
-        return CustomerME.handleTeamsMessagingExtensionQuery(context, query);
+        return CustomerME.query(context, query);
     });
 
 app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnState, item: Record<string, any>):
     Promise<MessagingExtensionResult> => {
         switch (item.queryType) {
             case 'supplierME': {
-                return SupplierME.handleTeamsMessagingExtensionSelectItem(context, item);
+                return SupplierME.selectItem(context, item);
             }
             case 'customerME': {
-                return CustomerME.handleTeamsMessagingExtensionSelectItem(context, item);
+                return CustomerME.selectItem(context, item);
             }
             default: {
                 return null;
