@@ -10,7 +10,8 @@ import { Query } from '@microsoft/teams-ai';
 interface NorthwindSupplierData {
     value: NorthwindSupplier[];
 }
-
+type SupplierValue = NorthwindSupplier & { meType: string, flagUrl: string, imageUrl: string };
+                
 export const meType = "supplierME";
 
 // Get suppliers given a query
@@ -37,24 +38,25 @@ export async function query<T> (context: TurnContext, state: T, query: Query<Rec
                 const previewAttachment = CardFactory.thumbnailCard(supplier.CompanyName,
                     `${supplier.City}, ${supplier.Country}`, [flagUrl]);
 
+                const value: SupplierValue = {
+                    meType: meType,
+                    SupplierID: supplier.SupplierID,
+                    flagUrl: flagUrl,
+                    imageUrl: imageUrl,
+                    Address: supplier.Address || "",
+                    City: supplier.City || "",
+                    CompanyName: supplier.CompanyName || "unknown",
+                    ContactName: supplier.ContactName || "",
+                    ContactTitle: supplier.ContactTitle || "",
+                    Country: supplier.Country || "",
+                    Fax: supplier.Fax || "",
+                    Phone: supplier.Phone || "",
+                    PostalCode: supplier.PostalCode || "",
+                    Region: supplier.Region || ""
+                }
                 previewAttachment.content.tap = {
                     type: "invoke",
-                    value: {    // Values passed to selectItem when an item is selected
-                        meType: meType,
-                        SupplierID: supplier.SupplierID,
-                        flagUrl: flagUrl,
-                        imageUrl: imageUrl,
-                        Address: supplier.Address || "",
-                        City: supplier.City || "",
-                        CompanyName: supplier.CompanyName || "unknown",
-                        ContactName: supplier.ContactName || "",
-                        ContactTitle: supplier.ContactTitle || "",
-                        Country: supplier.Country || "",
-                        Fax: supplier.Fax || "",
-                        Phone: supplier.Phone || "",
-                        PostalCode: supplier.PostalCode || "",
-                        Region: supplier.Region || ""
-                    },
+                    value: value
                 };
                 const attachment = { ...itemAttachment, preview: previewAttachment };
                 attachments.push(attachment);
@@ -71,7 +73,7 @@ export async function query<T> (context: TurnContext, state: T, query: Query<Rec
         }
     };
 
-export async function selectItem (context: TurnContext, selectedValue: any):
+export async function selectItem (context: TurnContext, selectedValue: SupplierValue):
         Promise<MessagingExtensionResult> {
 
         // Read card from JSON file
