@@ -12,9 +12,9 @@ In addition to code changes, these instructions will be needed in the lab:
 
 1. No easy way to correlate selectItem activities. I invented one but IMO the AI SDK should handle this.
 
-2. Should I make an interface for a message extension module?
-   In a real app I would!
+2. Need a way to make selectItem type safe - item is an any
 
-3. Would an ME module ever need access to application state?
+3. OK to use fetch (experimental in node 18)?
+
+4. Would an ME module ever need access to application state?
    Note the more elegant way of wiring it up I used in the supplier ME. Which do you prefer?
-

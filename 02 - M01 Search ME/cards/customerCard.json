@@ -6,7 +6,7 @@
         {
             "type": "TextBlock",
             "spacing": "extraLarge",
-            "text": "Northwind Supplier",
+            "text": "Northwind Customer",
             "wrap": true
         },
         {

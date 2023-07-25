@@ -1,7 +1,7 @@
 import { Application, DefaultTurnState, Query } from '@microsoft/teams-ai';
 import { ActivityTypes, MemoryStorage, TurnContext, MessagingExtensionResult } from 'botbuilder';
 import SupplierME from './messageExtensions/supplierME';
-import CustomerME from './messageExtensions/mockCustomerME';
+import CustomerME from './messageExtensions/customerME';
 
 interface ConversationState {
     count: number;

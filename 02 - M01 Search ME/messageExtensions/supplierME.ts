@@ -10,7 +10,7 @@ import { Query } from '@microsoft/teams-ai';
 interface NorthwindSupplierData {
     value: NorthwindSupplier[];
 }
-type SupplierValue = NorthwindSupplier & { meType: string, flagUrl: string, imageUrl: string };
+export type SupplierValue = NorthwindSupplier & { meType: string, flagUrl: string, imageUrl: string };
                 
 export const meType = "supplierME";
 
@@ -73,7 +73,7 @@ export async function query<T> (context: TurnContext, state: T, query: Query<Rec
         }
     };
 
-export async function selectItem (context: TurnContext, selectedValue: SupplierValue):
+export async function selectItem (context: TurnContext, selectedValue: any):
         Promise<MessagingExtensionResult> {
 
         // Read card from JSON file
@@ -98,20 +98,26 @@ export async function selectItem (context: TurnContext, selectedValue: SupplierV
     function getFlagUrl (country: string) : string {
 
         const COUNTRY_CODES = {
+            "argentina": "ar",
+            "austria": "at",
             "australia": "au",
+            "belgium": "be",
             "brazil": "br",
             "canada": "ca",
             "denmark": "dk",
             "france": "fr",
             "germany": "de",
             "finland": "fi",
+            "ireland": "ie",
             "italy": "it",
             "japan": "jp",
+            "mexico": "mx",
             "netherlands": "nl",
             "norway": "no",
             "singapore": "sg",
             "spain": "es",
             "sweden": "se",
+            "switzerland": "ch",
             "uk": "gb",
             "usa": "us"
         };
