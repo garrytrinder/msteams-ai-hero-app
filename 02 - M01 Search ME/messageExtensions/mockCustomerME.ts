@@ -11,7 +11,7 @@ interface NorthwindSupplierData {
     value: NorthwindSupplier[];
 }
 
-class SupplierME {
+class CustomerME {
 
     // Get suppliers given a query
     async handleTeamsMessagingExtensionQuery (context: TurnContext, query: Query<Record<string, any>>):
@@ -33,20 +33,20 @@ class SupplierME {
                 const flagUrl = this.#getFlagUrl(supplier.Country);
                 const imageUrl = `https://picsum.photos/seed/${supplier.SupplierID}/300`;
 
-                const itemAttachment = CardFactory.heroCard(supplier.CompanyName);
-                const previewAttachment = CardFactory.thumbnailCard(supplier.CompanyName,
+                const itemAttachment = CardFactory.heroCard("C " + supplier.CompanyName);
+                const previewAttachment = CardFactory.thumbnailCard("C " + supplier.CompanyName,
                     `${supplier.City}, ${supplier.Country}`, [flagUrl]);
 
                 previewAttachment.content.tap = {
                     type: "invoke",
                     value: {    // Values passed to selectItem when an item is selected
-                        queryType: 'supplierME',
+                        queryType: 'customerME',
                         SupplierID: supplier.SupplierID,
                         flagUrl: flagUrl,
                         imageUrl: imageUrl,
                         Address: supplier.Address || "",
                         City: supplier.City || "",
-                        CompanyName: supplier.CompanyName || "unknown",
+                        CompanyName: "C " + supplier.CompanyName || "unknown",
                         ContactName: supplier.ContactName || "",
                         ContactTitle: supplier.ContactTitle || "",
                         Country: supplier.Country || "",
@@ -77,6 +77,7 @@ class SupplierME {
         // Read card from JSON file
         const templateJson = require('../cards/supplierCard.json');
         const template = new ACData.Template(templateJson);
+        selectedValue.CompanyName = "I am a customer";
         const card = template.expand({
             $root: selectedValue
         });
@@ -119,4 +120,4 @@ class SupplierME {
     };
 }
 
-export default new SupplierME();
+export default new CustomerME();

@@ -1,6 +1,7 @@
 import { Application, DefaultTurnState, Query } from '@microsoft/teams-ai';
 import { ActivityTypes, MemoryStorage, TurnContext, MessagingExtensionResult } from 'botbuilder';
 import SupplierME from './messageExtensions/supplierME';
+import CustomerME from './messageExtensions/mockCustomerME';
 
 interface ConversationState {
     count: number;
@@ -32,10 +33,26 @@ app.messageExtensions.query('supplierQuery',
         return SupplierME.handleTeamsMessagingExtensionQuery(context, query);
     });
 
-app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnState, item: Record<string, any>):
+app.messageExtensions.query('customerQuery',
+    (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> => {
-        return SupplierME.handleTeamsMessagingExtensionSelectItem(context, item);
+        return CustomerME.handleTeamsMessagingExtensionQuery(context, query);
     });
+
+app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnState, item: Record<string, any>):
+    Promise<MessagingExtensionResult> => {
+        switch (item.queryType) {
+            case 'supplierME': {
+                return SupplierME.handleTeamsMessagingExtensionSelectItem(context, item);
+            }
+            case 'customerME': {
+                return CustomerME.handleTeamsMessagingExtensionSelectItem(context, item);
+            }
+            default: {
+                return null;
+            }
+        }
+});
 
 
 export default app;
