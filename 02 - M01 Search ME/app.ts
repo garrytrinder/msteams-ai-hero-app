@@ -1,5 +1,5 @@
-import { Application, DefaultTurnState } from '@microsoft/teams-ai';
-import { ActivityTypes, MemoryStorage, TurnContext } from 'botbuilder';
+import { Application, DefaultTurnState, Query } from '@microsoft/teams-ai';
+import { ActivityTypes, MemoryStorage, TurnContext, MessagingExtensionResult } from 'botbuilder';
 import SupplierME from './messageExtensions/supplierME';
 
 interface ConversationState {
@@ -26,9 +26,16 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
     await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
 });
 
-app.messageExtensions.query('supplierQuery',  async (context: TurnContext, state: ApplicationTurnState, query:Query<Record<string>>) => {
-});
+app.messageExtensions.query('supplierQuery',
+    (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
+        Promise<MessagingExtensionResult> => {
+        return SupplierME.handleTeamsMessagingExtensionQuery(context, query);
+    });
 
-SupplierME.handleTeamsMessagingExtensionQuery);
+app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnState, item: Record<string, any>):
+        Promise<MessagingExtensionResult> => {
+        return SupplierME.handleTeamsMessagingExtensionSelectItem(context, item);
+    });
+
 
 export default app;

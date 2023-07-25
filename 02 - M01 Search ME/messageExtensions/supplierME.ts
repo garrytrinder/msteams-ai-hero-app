@@ -1,34 +1,33 @@
-import ACData from "adaptivecards-templating";
+import * as ACData from "adaptivecards-templating";
 import { NorthwindSupplier } from "../model/INorthwindSupplier";
 import {
     CardFactory,
     TurnContext,
-    MessagingExtensionQuery,
-    MessagingExtensionResponse,
+    MessagingExtensionResult
   } from "botbuilder";
+import { Query } from '@microsoft/teams-ai';
 
 interface NorthwindSupplierData {
-    data: {
-        value: NorthwindSupplier[];
-    }
+    value: NorthwindSupplier[];
 }
 
 class SupplierME {
 
     // Get suppliers given a query
-    async handleTeamsMessagingExtensionQuery (context: TurnContext, query: MessagingExtensionQuery):
-        Promise<MessagingExtensionResponse> {
+    async handleTeamsMessagingExtensionQuery (context: TurnContext, query: Query<Record<string, any>>):
+        Promise<MessagingExtensionResult> {
 
         try {
+            const queryText = query.parameters.searchQuery;
             const response = await fetch(
                 `https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers` +
-                `?$filter=contains(tolower(CompanyName),tolower('${query}'))` +
+                `?$filter=contains(tolower(CompanyName),tolower('${queryText}'))` +
                 `&$orderby=CompanyName&$top=8`
             );
             const responseData = await response.json() as NorthwindSupplierData;
 
             const attachments = [];
-            responseData.data.value.forEach((supplier) => {
+            responseData.value.forEach((supplier) => {
 
                 // Free flag images from https://flagpedia.net/
                 const flagUrl = this.#getFlagUrl(supplier.Country);
@@ -62,11 +61,9 @@ class SupplierME {
             });
 
             return {
-                composeExtension: {
-                    type: "result",
-                    attachmentLayout: "list",
-                    attachments: attachments,
-                }
+                type: "result",
+                attachmentLayout: "list",
+                attachments: attachments,
             };
 
         } catch (error) {
@@ -74,7 +71,8 @@ class SupplierME {
         }
     };
 
-    handleTeamsMessagingExtensionSelectItem (context: TurnContext, selectedValue) {
+    async handleTeamsMessagingExtensionSelectItem (context: TurnContext, selectedValue: any):
+        Promise<MessagingExtensionResult> {
 
         // Read card from JSON file
         const templateJson = require('../cards/supplierCard.json');
@@ -86,11 +84,9 @@ class SupplierME {
         const resultCard = CardFactory.adaptiveCard(card);
 
         return {
-            composeExtension: {
-                type: "result",
-                attachmentLayout: "list",
-                attachments: [resultCard]
-            },
+            type: "result",
+            attachmentLayout: "list",
+            attachments: [resultCard]
         };
 
     };

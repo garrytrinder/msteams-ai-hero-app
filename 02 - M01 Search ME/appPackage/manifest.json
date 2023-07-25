@@ -39,7 +39,7 @@
             "botId": "${{BOT_ID}}",
             "commands": [
                 {
-                    "id": "searchQuery",
+                    "id": "supplierQuery",
                     "context": [
                         "compose",
                         "commandBox"
