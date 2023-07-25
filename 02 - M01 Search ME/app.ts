@@ -41,11 +41,11 @@ app.messageExtensions.query('customerQuery',
 
 app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnState, item: Record<string, any>):
     Promise<MessagingExtensionResult> => {
-        switch (item.queryType) {
-            case 'supplierME': {
+        switch (item.meType) {
+            case SupplierME.meType: {
                 return SupplierME.selectItem(context, item);
             }
-            case 'customerME': {
+            case CustomerME.meType: {
                 return CustomerME.selectItem(context, item);
             }
             default: {

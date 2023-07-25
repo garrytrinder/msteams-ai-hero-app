@@ -11,10 +11,10 @@ interface NorthwindSupplierData {
     value: NorthwindSupplier[];
 }
 
-class SupplierME {
+export const meType = "supplierME";
 
-    // Get suppliers given a query
-    async query (context: TurnContext, query: Query<Record<string, any>>):
+// Get suppliers given a query
+export async function query (context: TurnContext, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> {
 
         try {
@@ -30,7 +30,7 @@ class SupplierME {
             responseData.value.forEach((supplier) => {
 
                 // Free flag images from https://flagpedia.net/
-                const flagUrl = this.#getFlagUrl(supplier.Country);
+                const flagUrl = getFlagUrl(supplier.Country);
                 const imageUrl = `https://picsum.photos/seed/${supplier.SupplierID}/300`;
 
                 const itemAttachment = CardFactory.heroCard(supplier.CompanyName);
@@ -40,7 +40,7 @@ class SupplierME {
                 previewAttachment.content.tap = {
                     type: "invoke",
                     value: {    // Values passed to selectItem when an item is selected
-                        queryType: 'supplierME',
+                        meType: meType,
                         SupplierID: supplier.SupplierID,
                         flagUrl: flagUrl,
                         imageUrl: imageUrl,
@@ -71,7 +71,7 @@ class SupplierME {
         }
     };
 
-    async selectItem (context: TurnContext, selectedValue: any):
+export async function selectItem (context: TurnContext, selectedValue: any):
         Promise<MessagingExtensionResult> {
 
         // Read card from JSON file
@@ -93,7 +93,7 @@ class SupplierME {
 
     // Get a flag image URL given a country name
     // Thanks to https://flagpedia.net for providing flag images
-    #getFlagUrl (country: string) : string {
+    function getFlagUrl (country: string) : string {
 
         const COUNTRY_CODES = {
             "australia": "au",
@@ -117,6 +117,9 @@ class SupplierME {
         return `https://flagcdn.com/32x24/${COUNTRY_CODES[country.toLowerCase()]}.png`;
 
     };
-}
 
-export default new SupplierME();
+export default {
+    query: query,
+    selectItem: selectItem,
+    meType: meType
+}

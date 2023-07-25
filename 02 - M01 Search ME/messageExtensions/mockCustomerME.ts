@@ -13,6 +13,8 @@ interface NorthwindSupplierData {
 
 class CustomerME {
 
+    public meType = "customerME";
+
     // Get suppliers given a query
     async query (context: TurnContext, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> {
@@ -40,7 +42,7 @@ class CustomerME {
                 previewAttachment.content.tap = {
                     type: "invoke",
                     value: {    // Values passed to selectItem when an item is selected
-                        queryType: 'customerME',
+                        meType: this.meType,
                         SupplierID: supplier.SupplierID,
                         flagUrl: flagUrl,
                         imageUrl: imageUrl,
