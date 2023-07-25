@@ -1,5 +1,5 @@
 import * as ACData from "adaptivecards-templating";
-import { NorthwindSupplier } from "../model/INorthwindSupplier";
+import { NorthwindSupplier } from "../model/NorthwindSupplier";
 import {
     CardFactory,
     TurnContext,
