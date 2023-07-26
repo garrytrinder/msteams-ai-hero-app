@@ -1,6 +1,6 @@
 # Microsoft Teams AI Hero App
 
-This app is a proof of concept to prove that we can use Teams Toolkit v5 and Teams AI library to build a multi capability hero app. 
+This app is a proof of concept to prove that we can use Teams Toolkit v5 and Teams AI library to build a multi capability hero app. We are gathering questions and feedback into [this discussions document](./docs/teams-ai-toolkit-discussion-items.md).
 
 ## Get started
 
