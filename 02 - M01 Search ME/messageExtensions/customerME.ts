@@ -1,4 +1,3 @@
-import * as ACData from "adaptivecards-templating";
 import { NorthwindCustomer } from "../model/NorthwindCustomer";
 import {
     CardFactory,
@@ -6,6 +5,9 @@ import {
     MessagingExtensionResult
 } from "botbuilder";
 import { Query } from '@microsoft/teams-ai';
+
+import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
+import * as cardTemplate from '../adaptiveCards/customerCard.json';
 
 // Selected items are of this data type
 interface CustomerMEItem extends NorthwindCustomer {
@@ -81,12 +83,9 @@ export async function selectItem(context: TurnContext, selectedValue: any):
 
     const item = selectedValue as CustomerMEItem;
 
-    // Read card from JSON file
-    const templateJson = require('../cards/customerCard.json');
-    const template = new ACData.Template(templateJson);
-    const card = template.expand({
-        $root: item
-    });
+    // Build adaptive card to display the selected item
+    const card = AdaptiveCards.declare<CustomerMEItem>(cardTemplate).render(item);
+    const cardAttachment = CardFactory.adaptiveCard(card);
 
     const resultCard = CardFactory.adaptiveCard(card);
 
@@ -123,6 +122,7 @@ function getFlagUrl(country: string): string {
         "spain": "es",
         "sweden": "se",
         "switzerland": "ch",
+        "poland": "pl",
         "uk": "gb",
         "usa": "us"
     };
