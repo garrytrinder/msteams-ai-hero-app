@@ -7,11 +7,14 @@ import {
 } from "botbuilder";
 import { Query } from '@microsoft/teams-ai';
 
-interface NorthwindCustomerData {
-    value: NorthwindCustomer[];
+// Selected items are of this data type
+interface CustomerMEItem extends NorthwindCustomer {
+    meType: string;
+    flagUrl: string;
+    imageUrl: string;
 }
-type CustomerValue = NorthwindCustomer & { meType: string, flagUrl: string, imageUrl: string };
 
+// App uses this to correlate selectedItem events with this particular ME
 export const meType = "customerME";
 
 // Get suppliers given a query
@@ -25,7 +28,7 @@ export async function query(context: TurnContext, query: Query<Record<string, an
             `?$filter=contains(tolower(CompanyName),tolower('${queryText}'))` +
             `&$orderby=CompanyName&$top=8`
         );
-        const responseData = await response.json() as NorthwindCustomerData;
+        const responseData = await response.json() as { value: NorthwindCustomer[] };
 
         const attachments = [];
         responseData.value.forEach((customer) => {
@@ -38,7 +41,7 @@ export async function query(context: TurnContext, query: Query<Record<string, an
             const previewAttachment = CardFactory.thumbnailCard(customer.CompanyName,
                 `${customer.City}, ${customer.Country}`, [flagUrl]);
 
-            const value: CustomerValue = {
+            const value: CustomerMEItem = {
                 meType: this.meType,
                 CustomerID: customer.CustomerID,
                 flagUrl: flagUrl,
@@ -76,11 +79,13 @@ export async function query(context: TurnContext, query: Query<Record<string, an
 export async function selectItem(context: TurnContext, selectedValue: any):
     Promise<MessagingExtensionResult> {
 
+    const item = selectedValue as CustomerMEItem;
+
     // Read card from JSON file
     const templateJson = require('../cards/customerCard.json');
     const template = new ACData.Template(templateJson);
     const card = template.expand({
-        $root: selectedValue
+        $root: item
     });
 
     const resultCard = CardFactory.adaptiveCard(card);
@@ -128,10 +133,3 @@ function getFlagUrl(country: string): string {
     return `https://flagcdn.com/32x24/${COUNTRY_CODES[country.toLowerCase()]}.png`;
 
 };
-
-
-export default {
-    meType,
-    query,
-    selectItem
-}

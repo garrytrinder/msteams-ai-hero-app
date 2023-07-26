@@ -1,7 +1,7 @@
 import { Application, DefaultTurnState, Query } from '@microsoft/teams-ai';
 import { ActivityTypes, MemoryStorage, TurnContext, MessagingExtensionResult } from 'botbuilder';
-import SupplierME from './messageExtensions/supplierME';
-import CustomerME from './messageExtensions/customerME';
+import * as SupplierME from './messageExtensions/supplierME';
+import * as CustomerME from './messageExtensions/customerME';
 
 interface ConversationState {
     count: number;
@@ -27,8 +27,10 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
     await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
 });
 
+// If the ME's function matches the expected event handler's signature, you can pass it directly
 app.messageExtensions.query('supplierQuery', SupplierME.query<ApplicationTurnState>);
 
+// If not, then you can wrap it in a lambda
 app.messageExtensions.query('customerQuery',
     (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>):
         Promise<MessagingExtensionResult> => {
