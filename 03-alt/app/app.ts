@@ -4,7 +4,6 @@ import adapter from '../adapter';
 import config from '../config';
 import * as bot from './bot/bot';
 import * as me from './me/me';
-import * as tm from './tm/tm';
 
 interface ConversationState {
     count: number;
@@ -27,6 +26,5 @@ const app = new Application<ApplicationTurnState>({
 // Setup bot and messaging extensions
 bot.setup(app);
 me.setup(app);
-tm.setup(app);
 
 export default app;
