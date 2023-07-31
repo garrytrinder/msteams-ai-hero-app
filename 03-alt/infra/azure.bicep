@@ -18,6 +18,27 @@ param botDisplayName string
 param serverfarmsName string = resourceBaseName
 param webAppName string = resourceBaseName
 param location string = resourceGroup().location
+param storageAccountName string = resourceBaseName
+param blobContainerName string = 'state'
+
+// create azure storage account
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+  name: resourceBaseName
+  location: location
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+}
+
+resource storageAccountcontainerName 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-02-01' = {
+  name: '${storageAccountName}/default/${blobContainerName}'
+  dependsOn: [
+    storageAccount
+  ]
+}
+
+var blobStorageConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storageAccount.listKeys().keys[0].value}'
 
 // Compute resources for your Web App
 resource serverfarm 'Microsoft.Web/serverfarms@2021-02-01' = {
@@ -59,6 +80,14 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'BOT_PASSWORD'
           value: botAadAppClientSecret
+        }
+        {
+          name: 'BLOB_STORAGE_CONNECTION_STRING'
+          value: blobStorageConnectionString
+        }
+        {
+          name: 'BLOB_STORAGE_CONTAINER_NAME'
+          value: blobContainerName
         }
       ]
       ftpsState: 'FtpsOnly'

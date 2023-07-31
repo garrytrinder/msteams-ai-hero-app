@@ -57,6 +57,24 @@
                             "inputType": "text"
                         }
                     ]
+                },
+                {
+                    "id": "movieQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Look up a movie",
+                    "title": "Movie search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "queryText",
+                            "title": "Movie search",
+                            "description": "Look up a movie",
+                            "inputType": "text"
+                        }
+                    ]
                 }
             ]
         }
@@ -68,13 +86,23 @@
             "scopes": [
                 "team",
                 "groupchat"
+            ],
+            "context": [
+                "callingSidePanel",
+                "channelTab",
+                "meetingChatTab",
+                "meetingDetailsTab",
+                "meetingSidePanel",
+                "meetingStage",
+                "personalTab",
+                "privateChatTab"
             ]
         }
     ],
     "staticTabs": [
         {
             "entityId": "staticTab",
-            "name": "staticTab",
+            "name": "Static Tab",
             "contentUrl": "https://${{BOT_DOMAIN}}/static/tab.html",
             "scopes": [
                 "personal",
