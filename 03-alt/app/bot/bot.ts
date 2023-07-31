@@ -45,14 +45,14 @@ const setup = (app: Application) => {
     });
 
     // add message handler to echo back user input
-    // app.activity(ActivityTypes.Message, async (context: TurnContext, state: ApplicationTurnState) => {
-    //     // Increment count state
-    //     let count = state.conversation.value.count ?? 0;
-    //     state.conversation.value.count = ++count;
+    app.activity(ActivityTypes.Message, async (context: TurnContext, state: ApplicationTurnState) => {
+        // Increment count state
+        let count = state.conversation.value.count ?? 0;
+        state.conversation.value.count = ++count;
 
-    //     // Echo back users request
-    //     await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
-    // });
+        // Echo back users request
+        await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
+    });
 
     // add installation update handler to welcome user
     app.activity(ActivityTypes.InstallationUpdate, async (context: TurnContext, state: ApplicationTurnState) => {
