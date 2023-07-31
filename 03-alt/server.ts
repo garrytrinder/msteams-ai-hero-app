@@ -1,7 +1,7 @@
 
 import * as restify from "restify";
-import app from "./app";
-import adapter from "./app/bot/adapter";
+import app from "./app/app";
+import adapter from "./adapter";
 
 // create server
 const server = restify.createServer();
@@ -16,8 +16,10 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
 
 // Listen for incoming requests
 server.post("/api/messages", async (req, res) => {
+
   await adapter.process(req, res, async (context) => {
-      await app.run(context);
+    console.log(JSON.stringify(context,null,2));
+    await app.run(context);
   });
 });
 
@@ -25,7 +27,7 @@ server.post("/api/messages", async (req, res) => {
 server.get(
   "/*",
   restify.plugins.serveStatic({
-      directory: `${__dirname}/app/tab`,
+    directory: `${__dirname}/app/tab`,
   })
 );
 

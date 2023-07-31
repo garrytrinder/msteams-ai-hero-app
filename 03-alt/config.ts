@@ -1,4 +1,5 @@
 const config = {
+  botEndpoint: process.env.BOT_ENDPOINT,
   botId: process.env.BOT_ID,
   botPassword: process.env.BOT_PASSWORD,
   blobConnectionString: process.env.BLOB_STORAGE_CONNECTION_STRING,

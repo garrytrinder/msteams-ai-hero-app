@@ -1,5 +1,5 @@
 import { TurnContext, MessagingExtensionResult } from "botbuilder";
-import { ApplicationTurnState } from "../..";
+import { ApplicationTurnState } from "../app";
 
 export const query = (context: TurnContext, state: ApplicationTurnState, query: Record<string, any>) => {
     return new Promise<MessagingExtensionResult>((resolve, reject) => {

@@ -1,6 +1,6 @@
 import { Application } from "@microsoft/teams-ai";
 import { MessagingExtensionResult, TurnContext } from "botbuilder";
-import { ApplicationTurnState } from "..";
+import { ApplicationTurnState } from "../app";
 import supplier from "./supplier";
 import { query } from "./movies";
 

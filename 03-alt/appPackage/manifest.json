@@ -81,7 +81,7 @@
     ],
     "configurableTabs": [
         {
-            "configurationUrl": "https://${{BOT_DOMAIN}}/configurable/config.html",
+            "configurationUrl": "https://${{BOT_DOMAIN}}/config.html",
             "canUpdateConfiguration": true,
             "scopes": [
                 "team",
@@ -103,7 +103,7 @@
         {
             "entityId": "staticTab",
             "name": "Static Tab",
-            "contentUrl": "https://${{BOT_DOMAIN}}/static/tab.html",
+            "contentUrl": "https://${{BOT_DOMAIN}}/static.html",
             "scopes": [
                 "personal",
                 "groupChat",

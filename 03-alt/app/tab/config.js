@@ -6,8 +6,8 @@ import 'https://unpkg.com/@microsoft/teams-js@2.13.0/dist/MicrosoftTeams.min.js'
             microsoftTeams.pages.config.setConfig({
                 suggestedDisplayName: "Configurable Tab",
                 entityId: "configurableTab",
-                contentUrl: `https://${window.location.hostname}/configurable/tab.html`,
-                websiteUrl: `https://${window.location.hostname}/configurable/tab.html`,
+                contentUrl: `https://${window.location.hostname}/configtab.html`,
+                websiteUrl: `https://${window.location.hostname}/configtab.html`,
             }).then(() => {
                 saveEvent.notifySuccess();
             });

@@ -1,5 +1,5 @@
 import { CloudAdapter, ConfigurationBotFrameworkAuthentication, ConfigurationServiceClientCredentialFactory, TurnContext } from "botbuilder";
-import config from "../config";
+import config from "./config";
 
 // create bot framework authentication configuration
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
