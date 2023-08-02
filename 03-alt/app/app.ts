@@ -20,7 +20,8 @@ const storage = new BlobsStorage(
 // Create application
 const app = new Application<ApplicationTurnState>({
     adapter,
-    storage
+    botAppId: config.botId,
+    storage,
 });
 
 // Setup bot and messaging extensions

@@ -16,9 +16,7 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
 
 // Listen for incoming requests
 server.post("/api/messages", async (req, res) => {
-
   await adapter.process(req, res, async (context) => {
-    console.log(JSON.stringify(context,null,2));
     await app.run(context);
   });
 });
@@ -27,7 +25,7 @@ server.post("/api/messages", async (req, res) => {
 server.get(
   "/*",
   restify.plugins.serveStatic({
-    directory: `${__dirname}/app/tab`,
+    directory: `${__dirname}/app/pages/dist`,
   })
 );
 

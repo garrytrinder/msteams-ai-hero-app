@@ -17,7 +17,3 @@ lib/
 
 # Azurite emulator
 _storage_emulator
-
-# Parcel
-.parcel-cache
-dist

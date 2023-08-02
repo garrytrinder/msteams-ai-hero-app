@@ -5,7 +5,7 @@ import {
   } from "botbuilder";
 import { Query } from '@microsoft/teams-ai';
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
-import supplierCard from "./supplier.json";
+import supplierCard from "../card/supplier.json";
 
 export interface NorthwindSupplier {
     SupplierID: number,

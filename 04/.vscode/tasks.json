@@ -12,7 +12,6 @@
                 "Provision",
                 "Deploy",
                 "Start Azurite emulator",
-                "Start parcel",
                 "Start application"
             ],
             "dependsOrder": "sequence"
@@ -80,30 +79,6 @@
             }
         },
         {
-            "label": "Start parcel",
-            "type": "shell",
-            "command": "npm run dev",
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}/app/pages"
-            },
-            "problemMatcher": {
-                "pattern": [
-                    {
-                        "regexp": "^.*$",
-                        "file": 0,
-                        "location": 1,
-                        "message": 2
-                    }
-                ],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": "Building",
-                    "endsPattern": "Built in"
-                }
-            },
-        },
-        {
             "label": "Start Azurite emulator",
             "type": "shell",
             "command": "npm run storage",
@@ -154,8 +129,7 @@
                 }
             },
             "dependsOn": [
-                "Start Azurite emulator",
-                "Start parcel"
+                "Start Azurite emulator"
             ]
         }
     ]

@@ -9,16 +9,6 @@ const setup = (app: Application) => {
         await context.sendActivity(`Thanks for installing me!`);
     });
 
-    // add message handler to echo back user input
-    app.activity(ActivityTypes.Message, async (context: TurnContext, state: ApplicationTurnState) => {
-        // Increment count state
-        let count = state.conversation.value.count ?? 0;
-        state.conversation.value.count = ++count;
-
-        // Echo back users request
-        await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
-    });
-
     // add reset command to reset conversation state
     app.message('/reset', async (context: TurnContext, state: ApplicationTurnState) => {
         state.conversation.delete();
@@ -112,6 +102,16 @@ const setup = (app: Application) => {
                 }
             }
         } as TaskModuleTaskInfo;
+    });
+    
+    // add message handler to echo back user input
+    app.activity(ActivityTypes.Message, async (context: TurnContext, state: ApplicationTurnState) => {
+        // Increment count state
+        let count = state.conversation.value.count ?? 0;
+        state.conversation.value.count = ++count;
+
+        // Echo back users request
+        await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
     });
 }
 
