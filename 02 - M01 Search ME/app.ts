@@ -1,6 +1,7 @@
 import { Application, DefaultTurnState, Query } from '@microsoft/teams-ai';
 import { ActivityTypes, MemoryStorage, TurnContext, MessagingExtensionResult } from 'botbuilder';
 import * as SupplierME from './messageExtensions/supplierME';
+import * as ProductME from './messageExtensions/productME';
 import * as CustomerME from './messageExtensions/customerME';
 
 interface ConversationState {
@@ -29,6 +30,7 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
 
 // If the ME's function matches the expected event handler's signature, you can pass it directly
 app.messageExtensions.query('supplierQuery', SupplierME.query<ApplicationTurnState>);
+app.messageExtensions.query('productQuery', ProductME.query<ApplicationTurnState>);
 
 // If not, then you can wrap it in a lambda
 app.messageExtensions.query('customerQuery',
@@ -42,6 +44,9 @@ app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnSt
         switch (item.meType) {
             case SupplierME.meType: {
                 return SupplierME.selectItem(context, item);
+            }
+            case ProductME.meType: {
+                return ProductME.selectItem(context, item);
             }
             case CustomerME.meType: {
                 return CustomerME.selectItem(context, item);

@@ -39,6 +39,24 @@
             "botId": "${{BOT_ID}}",
             "commands": [
                 {
+                    "id": "productQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Look up a Northwind product",
+                    "title": "Product search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "queryText",
+                            "title": "Product search",
+                            "description": "Look up a Northwind product",
+                            "inputType": "text"
+                        }
+                    ]
+                },
+                {
                     "id": "supplierQuery",
                     "context": [
                         "compose",
