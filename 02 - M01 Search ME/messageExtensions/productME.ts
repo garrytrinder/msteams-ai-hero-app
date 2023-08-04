@@ -6,7 +6,7 @@ import {
 } from "botbuilder";
 import { Query } from '@microsoft/teams-ai';
 
-import { getCardAttachment } from "../adaptiveCards/productCard/productCard";
+import { getCardAttachment } from "../adaptiveCards/productCard";
 
 // Selected items are of this data type
 interface ProductMEItem extends NorthwindProduct {

@@ -3,6 +3,7 @@ import { ActivityTypes, MemoryStorage, TurnContext, MessagingExtensionResult } f
 import * as SupplierME from './messageExtensions/supplierME';
 import * as ProductME from './messageExtensions/productME';
 import * as CustomerME from './messageExtensions/customerME';
+import * as ProductCard from './adaptiveCards/productCard';
 
 interface ConversationState {
     count: number;
@@ -25,7 +26,7 @@ app.activity(ActivityTypes.Message, async (context: TurnContext, state: Applicat
     state.conversation.value.count = ++count;
 
     // Echo back users request
-    await context.sendActivity(`[${count}] you said: ${context.activity.text}`);
+    await context.sendActivity(`[${count}] you sent ${context.activity.text ?? 'a message with no text'}`);
 });
 
 // If the ME's function matches the expected event handler's signature, you can pass it directly
@@ -57,5 +58,6 @@ app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnSt
         }
 });
 
+app.adaptiveCards.actionExecute('ok', ProductCard.actionExecute<ApplicationTurnState>);
 
 export default app;
