@@ -6,8 +6,7 @@ import {
 } from "botbuilder";
 import { Query } from '@microsoft/teams-ai';
 
-import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
-import * as cardTemplate from '../adaptiveCards/productCard.json';
+import { getCardAttachment } from "../adaptiveCards/productCard/productCard";
 
 // Selected items are of this data type
 interface ProductMEItem extends NorthwindProduct {
@@ -79,10 +78,7 @@ export async function selectItem(context: TurnContext, selectedValue: any):
     Promise<MessagingExtensionResult> {
 
     const item: ProductMEItem = selectedValue;
-
-    // Build adaptive card to display the selected item
-    const card = AdaptiveCards.declare<ProductMEItem>(cardTemplate).render(item);
-    const cardAttachment = CardFactory.adaptiveCard(card);
+    const cardAttachment = await getCardAttachment(item);
 
     return {
         type: "result",
