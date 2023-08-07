@@ -1,15 +1,10 @@
-import { Application, Query } from "@microsoft/teams-ai";
+import { Application } from "@microsoft/teams-ai";
 import { MessagingExtensionResult, TurnContext } from "botbuilder";
 import { ApplicationTurnState } from "../app";
-import supplier from "./supplier";
 import { query } from "./movies";
 
 const setup = (app: Application<ApplicationTurnState>) => {
-
-    app.messageExtensions.query('supplierQuery', (context: TurnContext, state: ApplicationTurnState, query: Query<Record<string, any>>)=>{
-        return supplier.query(context, state, query);
-    });
-
+    
     app.messageExtensions.query('movieQuery', query);
     
     app.messageExtensions.selectItem((context: TurnContext, state: ApplicationTurnState, item: Record<string, any>) => {

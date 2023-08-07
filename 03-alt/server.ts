@@ -1,4 +1,3 @@
-
 import * as restify from "restify";
 import app from "./app/app";
 import adapter from "./adapter";

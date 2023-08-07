@@ -41,24 +41,6 @@
             "botId": "${{BOT_ID}}",
             "commands": [
                 {
-                    "id": "supplierQuery",
-                    "context": [
-                        "compose",
-                        "commandBox"
-                    ],
-                    "description": "Look up a Northwind supplier",
-                    "title": "Supplier search",
-                    "type": "query",
-                    "parameters": [
-                        {
-                            "name": "queryText",
-                            "title": "Supplier search",
-                            "description": "Look up a Northwind supplier",
-                            "inputType": "text"
-                        }
-                    ]
-                },
-                {
                     "id": "movieQuery",
                     "context": [
                         "compose",
@@ -115,5 +97,7 @@
         "identity",
         "messageTeamMembers"
     ],
-    "validDomains": []
+    "validDomains": [
+        "${{BOT_DOMAIN}}"
+    ]
 }
