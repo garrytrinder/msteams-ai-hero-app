@@ -17,6 +17,9 @@ const setup = (app: Application) => {
 
     // add message handler to echo back user input
     app.activity(ActivityTypes.Message, async (context: TurnContext, state: ApplicationTurnState) => {
+        // check to see if the activity is a message with text, we don't want to reply to an adaptive card
+        if (typeof context.activity.text === 'undefined') return;
+
         // Increment count state
         let count = state.conversation.value.count ?? 0;
         state.conversation.value.count = ++count;

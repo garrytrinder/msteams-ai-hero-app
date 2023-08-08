@@ -4,7 +4,7 @@ import adapter from '../adapter';
 import config from '../config';
 import * as bot from './bots/bot';
 import * as messageExtensions from './messageExtensions/messageExtensions';
-import * as taskModules from './taskModules/taskmodules';
+import * as taskModules from './taskModules/taskModules';
 
 interface ConversationState {
     count: number;
@@ -25,9 +25,8 @@ const app = new Application<ApplicationTurnState>({
     storage,
 });
 
-// Setup bot and messaging extensions
-bot.setup(app);
 messageExtensions.setup(app);
 taskModules.setup(app);
+bot.setup(app);
 
 export default app;
