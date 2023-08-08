@@ -1,8 +1,8 @@
-// copy all files and folders from app/pages/dist to lib/app/pages/dist
+// copy all files and folders from app/pages/lib to lib/app/pages/dist
 const fs = require('fs-extra');
 const path = require('path');
 
-const src = path.resolve(__dirname, '../app/pages/dist');
+const src = path.resolve(__dirname, '../app/pages/lib');
 const dest = path.resolve(__dirname, '../lib/app/pages/dist');
 
 console.log('copying files from ' + src + ' to ' + dest);
