@@ -1,6 +1,7 @@
 import * as restify from "restify";
-import app from "./app/app";
-import adapter from "./adapter";
+import { postMessages } from "./app/routes/messages";
+import { deleteCustomer, getCustomer, getCustomers, patchCustomer, postCustomer } from "./app/routes/customers";
+import { getConfig } from "./app/routes/config";
 
 // create server
 const server = restify.createServer();
@@ -13,12 +14,14 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
   console.log(`\nBot Started, ${server.name} listening to ${server.url}`);
 });
 
-// Listen for incoming requests
-server.post("/api/messages", async (req, res) => {
-  await adapter.process(req, res, async (context) => {
-    await app.run(context);
-  });
-});
+// handle incoming messages
+server.post("/api/messages", postMessages);
+server.get("/api/customers", getCustomers);
+server.get("/api/customers/:id", getCustomer);
+server.post("/api/customers", postCustomer);
+server.del("/api/customers/:id", deleteCustomer);
+server.patch("/api/customers/:id", patchCustomer);
+server.get("/api/config", getConfig);
 
 // Serve static tab files
 server.get(

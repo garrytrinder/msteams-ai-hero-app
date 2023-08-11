@@ -1,4 +1,5 @@
 const { TableClient, TableServiceClient } = require("@azure/data-tables");
+const { randomUUID } = require("crypto");
 const fs = require("fs");
 const path = require("path");
 
@@ -12,27 +13,14 @@ const path = require("path");
         const tableClient = TableClient.fromConnectionString("UseDevelopmentStorage=true", table);
         const jsonString = fs.readFileSync(path.resolve(__dirname, "db", `${table}.json`), "utf8");
         const entities = JSON.parse(jsonString);
-        if (table === "OrderDetails") {
-            for (const entity of entities.OrderDetails) {
-                const rowKey = `${entity.OrderID}_${entity.ProductID}`;
-                await tableClient.createEntity({
-                    partitionKey: table,
-                    rowKey,
-                    ...entity
-                });
-            }
-        }
-        else {
-            for (const entity of entities[table]) {
-                const rowKey = `${entity[Object.keys(entity)[0]]}`;
-                console.log(`${table} - ${rowKey}`);
-                await tableClient.createEntity({
-                    partitionKey: table,
-                    rowKey,
-                    ...entity
-                });
-            }
+        for (const entity of entities[table]) {
+            const rowKey = randomUUID();
+            console.log(`${table} - ${rowKey}`);
+            await tableClient.createEntity({
+                partitionKey: table,
+                rowKey,
+                ...entity
+            });
         }
     });
-
 })();

@@ -1,11 +1,18 @@
-interface Category {
+interface Row {
+    etag: string;
+    partitionKey: string;
+    rowKey: string;
+    timestamp: Date;
+}
+
+export interface Category extends Row {
     CategoryID: number;
     CategoryName: string;
     Description: string;
     Picture: string;
 }
 
-interface Cusomer {
+export interface Customer extends Row {
     CustomerID: string;
     CompanyName: string;
     ContactName: string;
@@ -19,7 +26,7 @@ interface Cusomer {
     Fax: string;
 }
 
-interface Employee {
+export interface Employee extends Row {
     EmployeeID: number;
     LastName: string;
     FirstName: string;
@@ -40,7 +47,7 @@ interface Employee {
     PhotoPath: string;
 }
 
-interface OrderDetail {
+export interface OrderDetail extends Row {
     OrderID: number;
     ProductID: number;
     UnitPrice: number;
@@ -48,7 +55,7 @@ interface OrderDetail {
     Discount: number;
 }
 
-interface Product {
+export interface Product extends Row {
     ProductID: number;
     ProductName: string;
     SupplierID: number;
@@ -61,12 +68,12 @@ interface Product {
     Discontinued: boolean;
 }
 
-interface Region {
+export interface Region extends Row {
     RegionID: number;
     RegionDescription: string;
 }
 
-interface Supplier {
+export interface Supplier extends Row {
     SupplierID: number;
     CompanyName: string;
     ContactName: string;
@@ -81,7 +88,7 @@ interface Supplier {
     HomePage: string;
 }
 
-interface Territory {
+export interface Territory extends Row {
     TerritoryID: string;
     TerritoryDescription: string;
     RegionID: number;
