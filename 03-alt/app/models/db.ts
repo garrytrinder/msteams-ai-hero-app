@@ -55,6 +55,24 @@ export interface OrderDetail extends Row {
     Discount: number;
 }
 
+export interface Order extends Row {
+    OrderID: number,
+    CustomerID: string,
+    EmployeeID: number,
+    OrderDate: string,
+    RequiredDate?: string,
+    ShippedDate?: string,
+    OrderDetails: OrderDetail[],
+    ShipVia: string,
+    Freight: 11.61,
+    ShipName: "Toms Spezialitäten",
+    ShipAddress: "Luisenstr. 48",
+    ShipCity: "Münster",
+    ShipRegion: null,
+    ShipPostalCode: "44087",
+    ShipCountry: "Germany"
+}
+
 export interface Product extends Row {
     ProductID: number;
     ProductName: string;
@@ -66,11 +84,6 @@ export interface Product extends Row {
     UnitsOnOrder: number;
     ReorderLevel: number;
     Discontinued: boolean;
-}
-
-export interface Region extends Row {
-    RegionID: number;
-    RegionDescription: string;
 }
 
 export interface Supplier extends Row {
@@ -86,10 +99,4 @@ export interface Supplier extends Row {
     Phone: string;
     Fax: string;
     HomePage: string;
-}
-
-export interface Territory extends Row {
-    TerritoryID: string;
-    TerritoryDescription: string;
-    RegionID: number;
 }
