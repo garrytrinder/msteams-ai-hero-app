@@ -67,9 +67,6 @@ const path = require("path");
                 ...entity
             });
         }
-
     });
-
-
 
 })();
