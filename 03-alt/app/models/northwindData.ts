@@ -5,7 +5,7 @@ import {
 import { TableClient } from "@azure/data-tables";
 import config from "../../config";
 
-// export async function getCategories(): Promise<Category[]> { return []; }
+//#region Customers --------------------------------------------------------------------------------------
 
 export const getCustomers = async (): Promise<Customer[]> => {
     const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME.CUSTOMER);
@@ -47,9 +47,20 @@ export const updateCustomer = async (updatedCustomer: Customer): Promise<void> =
     await tableClient.updateEntity({ ...customer, ...updatedCustomer }, "Merge");
 };
 
-// export async function getEmployees(): Promise<Employee> { return null }
+//#endregion
 
-// export async function getOrders(): Promise<Order> { return null }
+//#region Orders -----------------------------------------------------------------------------------------
+
+// export async function getOrdersByEmployee(employeeID: number): Promise<Order[]> { return []; }
+
+// Note this function should return the order and denormalized order details:
+// export async function getOrder(): Promise<Order> { return null }
+
+//#endregion
+
+//#region Products and Categories ------------------------------------------------------------------------
+
+// export async function getCategories(): Promise<Category[]> { return []; }
 
 // export async function getProductsByCategory(categoryID: number): Promise<Product> { return null }
 
@@ -59,6 +70,11 @@ export const updateCustomer = async (updatedCustomer: Customer): Promise<void> =
 
 // export async function getProduct(): Promise<Product> { return null }
 
+//#endregion
+
+//#region Suppliers ---------------------------------------------------------------------------------------
+
 // export async function getSuppliers() : Promise<Supplier> { return null }
 
+//#endregion
 
