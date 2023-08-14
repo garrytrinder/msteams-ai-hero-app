@@ -1,66 +1,35 @@
 import { TableClient } from "@azure/data-tables";
-import config from "../../config";
-import { randomUUID } from "crypto";
+// import config from "../../config";
+// import { randomUUID } from "crypto";
 import { Customer } from "../models/db";
+import * as NorthwindData from "../models/northwindData";
 
-const TABLE_NAME = "Customers";
+// const TABLE_NAME = "Customers";
 
 export const getCustomers = async (req, res) => {
-    const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME);
-    const entities = tableClient.listEntities();
-    let result = [];
-    for await (const entity of entities) {
-        result.push(entity);
-    }
-    res.send(result);
+    const customers = await NorthwindData.getCustomers();
+    res.send(customers);
 };
 
 export const getCustomer = async (req, res) => {
     const { id } = req.params;
-    const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME);
-    const customer = await tableClient.getEntity(TABLE_NAME, id);
-    if (!customer) {
-        res.status(404);
-        return;
-    }
+    const customer = await NorthwindData.getCustomer(id);
     res.send(customer);
 };
 
 export const postCustomer = async (req, res) => {
-    const rowKey = randomUUID();
-    const newCustomer: Customer = {
-        partitionKey: "Customers",
-        rowKey,
-        ...req.body,
-    }
-    const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME);
-    await tableClient.createEntity(newCustomer);
-    const customer = await tableClient.getEntity(TABLE_NAME, rowKey);
-    res.send(customer);
+    const newCustomer = req.body as Customer;
+    await NorthwindData.createCustomer(newCustomer);
+    res.send('OK');
 };
 
 export const deleteCustomer = async (req, res) => {
     const { id } = req.params;
-    const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME);
-    const customer = await tableClient.getEntity(TABLE_NAME, id) as Customer;
-    if (!customer) {
-        res.status(404);
-        return;
-    }
-    await tableClient.deleteEntity(TABLE_NAME, id);
-    res.status(204);
-    res.send();
+    await NorthwindData.deleteCustomer(id);
+    res.send('OK');
 };
 
 export const patchCustomer = async (req, res) => {
-    const { id } = req.params;
-    const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME);
-    const customer = await tableClient.getEntity(TABLE_NAME, id) as Customer;
-    if (!customer) {
-        res.status(404);
-        return;
-    }
-    await tableClient.updateEntity({ ...customer, ...req.body }, "Merge");
-    const updatedCustomer = await tableClient.getEntity(TABLE_NAME, id);
-    res.send(updatedCustomer);
+    await NorthwindData.updateCustomer(req.body);
+    res.send('OK');
 };

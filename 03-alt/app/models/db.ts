@@ -1,3 +1,13 @@
+export const TABLE_NAME = {
+    CATEGORY: "Categories",
+    CUSTOMER: "Customers",
+    EMPLOYEE: "Employees",
+    ORDER: "Orders",
+    ORDER_DETAIL: "OrderDetails",
+    PRODUCT: "Products",
+    SUPPLIER: "Suppliers"
+}
+
 interface Row {
     etag: string;
     partitionKey: string;
@@ -24,6 +34,8 @@ export interface Customer extends Row {
     Country: string;
     Phone: string;
     Fax: string;
+    ImageUrl: string;
+    FlagUrl: string;
 }
 
 export interface Employee extends Row {
@@ -45,6 +57,8 @@ export interface Employee extends Row {
     Notes: string;
     ReportsTo: number;
     PhotoPath: string;
+    ImageUrl: string;
+    FlagUrl: string;
 }
 
 export interface OrderDetail extends Row {
@@ -84,6 +98,7 @@ export interface Product extends Row {
     UnitsOnOrder: number;
     ReorderLevel: number;
     Discontinued: boolean;
+    ImageUrl: string;
 }
 
 export interface Supplier extends Row {
