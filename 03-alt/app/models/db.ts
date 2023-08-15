@@ -1,3 +1,13 @@
+export const TABLE_NAME = {
+    CATEGORY: "Categories",
+    CUSTOMER: "Customers",
+    EMPLOYEE: "Employees",
+    ORDER: "Orders",
+    ORDER_DETAIL: "OrderDetails",
+    PRODUCT: "Products",
+    SUPPLIER: "Suppliers"
+}
+
 interface Row {
     etag: string;
     partitionKey: string;
@@ -24,6 +34,8 @@ export interface Customer extends Row {
     Country: string;
     Phone: string;
     Fax: string;
+    ImageUrl: string;
+    FlagUrl: string;
 }
 
 export interface Employee extends Row {
@@ -45,6 +57,8 @@ export interface Employee extends Row {
     Notes: string;
     ReportsTo: number;
     PhotoPath: string;
+    ImageUrl: string;
+    FlagUrl: string;
 }
 
 export interface OrderDetail extends Row {
@@ -53,6 +67,24 @@ export interface OrderDetail extends Row {
     UnitPrice: number;
     Quantity: number;
     Discount: number;
+}
+
+export interface Order extends Row {
+    OrderID: number,
+    CustomerID: string,
+    EmployeeID: number,
+    OrderDate: string,
+    RequiredDate?: string,
+    ShippedDate?: string,
+    OrderDetails: OrderDetail[],
+    ShipVia: string,
+    Freight: 11.61,
+    ShipName: "Toms Spezialitäten",
+    ShipAddress: "Luisenstr. 48",
+    ShipCity: "Münster",
+    ShipRegion: null,
+    ShipPostalCode: "44087",
+    ShipCountry: "Germany"
 }
 
 export interface Product extends Row {
@@ -66,11 +98,7 @@ export interface Product extends Row {
     UnitsOnOrder: number;
     ReorderLevel: number;
     Discontinued: boolean;
-}
-
-export interface Region extends Row {
-    RegionID: number;
-    RegionDescription: string;
+    ImageUrl: string;
 }
 
 export interface Supplier extends Row {
@@ -86,10 +114,4 @@ export interface Supplier extends Row {
     Phone: string;
     Fax: string;
     HomePage: string;
-}
-
-export interface Territory extends Row {
-    TerritoryID: string;
-    TerritoryDescription: string;
-    RegionID: number;
 }
