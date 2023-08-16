@@ -21,7 +21,7 @@ const storage = new BlobsStorage(
 // Create application
 const app = new Application<ApplicationTurnState>({
     adapter,
-    botAppId: config.botId,
+    botAppId: config.aadAppId,
     storage,
 });
 

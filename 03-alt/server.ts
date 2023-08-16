@@ -2,6 +2,7 @@ import * as restify from "restify";
 import { postMessages } from "./app/routes/messages";
 import { deleteCustomer, getCustomer, getCustomers, patchCustomer, postCustomer } from "./app/routes/customers";
 import { getConfig } from "./app/routes/config";
+import { postProfile } from "./app/routes/profile";
 
 // create server
 const server = restify.createServer();
@@ -22,6 +23,7 @@ server.post("/api/customers", postCustomer);
 server.del("/api/customers/:id", deleteCustomer);
 server.patch("/api/customers/:id", patchCustomer);
 server.get("/api/config", getConfig);
+server.post("/api/profile", postProfile);
 
 // Serve static tab files
 server.get(

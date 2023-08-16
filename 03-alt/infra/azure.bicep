@@ -74,11 +74,11 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
           value: '1'
         }
         {
-          name: 'BOT_ID'
+          name: 'AAD_APP_CLIENT_ID'
           value: botAadAppClientId
         }
         {
-          name: 'BOT_PASSWORD'
+          name: 'AAD_APP_CLIENT_SECRET'
           value: botAadAppClientSecret
         }
         {
@@ -108,4 +108,5 @@ module azureBotRegistration './botRegistration/azurebot.bicep' = {
 
 // The output will be persisted in .env.{envName}. Visit https://aka.ms/teamsfx-actions/arm-deploy for more details.
 output BOT_AZURE_APP_SERVICE_RESOURCE_ID string = webApp.id
-output BOT_DOMAIN string = webApp.properties.defaultHostName
+output APP_DOMAIN string = webApp.properties.defaultHostName
+output APP_ENDPOINT string = 'https://${webApp.properties.defaultHostName}'

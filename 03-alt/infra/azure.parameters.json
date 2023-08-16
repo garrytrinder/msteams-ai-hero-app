@@ -6,16 +6,16 @@
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
     "botAadAppClientId": {
-      "value": "${{BOT_ID}}"
+      "value": "${{AAD_APP_CLIENT_ID}}"
     },
     "botAadAppClientSecret": {
-      "value": "${{SECRET_BOT_PASSWORD}}"
+      "value": "${{SECRET_AAD_APP_CLIENT_SECRET}}"
     },
     "webAppSKU": {
       "value": "B1"
     },
     "botDisplayName": {
-      "value": "msteams-ai-hero-app"
+      "value": "msteams-ai-hero-app-${{RESOURCE_SUFFIX}}"
     }
   }
 }
