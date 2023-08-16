@@ -5,8 +5,8 @@ import config from "./config";
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
     {},
     new ConfigurationServiceClientCredentialFactory({
-        MicrosoftAppId: config.botId,
-        MicrosoftAppPassword: config.botPassword,
+        MicrosoftAppId: config.aadAppId,
+        MicrosoftAppPassword: config.aadAppClientSecret,
         MicrosoftAppType: "MultiTenant",
     })
 );

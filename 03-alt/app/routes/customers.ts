@@ -1,10 +1,5 @@
-import { TableClient } from "@azure/data-tables";
-// import config from "../../config";
-// import { randomUUID } from "crypto";
 import { Customer } from "../models/db";
 import * as NorthwindData from "../models/northwindData";
-
-// const TABLE_NAME = "Customers";
 
 export const getCustomers = async (req, res) => {
     const customers = await NorthwindData.getCustomers();
