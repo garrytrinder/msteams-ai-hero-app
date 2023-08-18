@@ -1,8 +1,8 @@
-export interface NameDisplay {
+export interface NameDisplayCard {
     name: string;
 }
 
-export interface Movie {
+export interface UserListItem {
     title: string;
     subtitle: string;
     text: string;

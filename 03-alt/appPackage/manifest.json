@@ -41,19 +41,19 @@
             "botId": "${{AAD_APP_CLIENT_ID}}",
             "commands": [
                 {
-                    "id": "movieQuery",
+                    "id": "personQuery",
                     "context": [
                         "compose",
                         "commandBox"
                     ],
-                    "description": "Look up a movie",
-                    "title": "Movie search",
+                    "description": "Look up a person",
+                    "title": "Person search",
                     "type": "query",
                     "parameters": [
                         {
                             "name": "queryText",
-                            "title": "Movie search",
-                            "description": "Look up a movie",
+                            "title": "Person search",
+                            "description": "Lookup a person",
                             "inputType": "text"
                         }
                     ]
@@ -102,6 +102,6 @@
     ],
     "webApplicationInfo": {
         "id": "${{AAD_APP_CLIENT_ID}}",
-        "resource": "api://${{APP_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+        "resource": "api://${{APP_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
       }
 }

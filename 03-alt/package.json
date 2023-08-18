@@ -25,12 +25,14 @@
         "@azure/data-tables": "^13.2.2",
         "@microsoft/adaptivecards-tools": "^1.0.0",
         "@microsoft/teams-ai": "^0.1.0-preview.2",
+        "@microsoft/teamsfx": "^2.2.2",
         "botbuilder": "^4.17.0",
         "botbuilder-azure-blobs": "^4.20.0",
         "msal-node": "^0.0.1-security",
         "restify": "^10.0.0"
     },
     "devDependencies": {
+        "@microsoft/microsoft-graph-types": "^2.38.0",
         "@types/node": "^14.0.0",
         "@types/restify": "^8.5.5",
         "azurite": "^3.25.1",

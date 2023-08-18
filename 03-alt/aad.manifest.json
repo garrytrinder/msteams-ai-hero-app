@@ -90,19 +90,15 @@
         }
     ],
     "identifierUris": [
-        "api://${{APP_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+        "api://${{APP_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{APP_ENDPOINT}}/auth/auth-end.html",
+            "url": "${{APP_ENDPOINT}}/auth-end.html",
             "type": "Web"
         },
         {
-            "url": "${{APP_ENDPOINT}}/auth/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
-            "type": "Spa"
-        },
-        {
-            "url": "${{APP_ENDPOINT}}/auth/blank-auth-end.html",
+            "url": "${{APP_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
             "type": "Spa"
         }
     ]
