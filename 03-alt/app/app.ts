@@ -13,7 +13,7 @@ interface ConversationState {
 export type ApplicationTurnState = DefaultTurnState<ConversationState>;
 
 // Create storage
-const storage = new BlobsStorage(
+export const storage = new BlobsStorage(
     config.blobConnectionString,
     config.blobContainerName
 );
@@ -22,10 +22,13 @@ const storage = new BlobsStorage(
 const app = new Application<ApplicationTurnState>({
     adapter,
     botAppId: config.aadAppId,
-    storage,
+    storage,    
+    authentication: {
+        connectionName: "MicrosoftGraph",
+        title: "Sign In"
+    }
 });
 
-messageExtensions.setup(app);
 taskModules.setup(app);
 bot.setup(app);
 
