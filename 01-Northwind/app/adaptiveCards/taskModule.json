@@ -1,0 +1,29 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.5",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Task Module",
+            "size": "large",
+            "weight": "bolder"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Click the button below to open a task module",
+            "wrap": true
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Open Task Module",
+            "data": {
+                "msteams": {
+                    "type": "task/fetch"
+                },
+                "verb": "fetchName"
+            }
+        }
+    ]
+}
