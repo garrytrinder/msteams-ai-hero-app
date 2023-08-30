@@ -1,4 +1,5 @@
 const config = {
+  aadAppOAuthAuthorityHost: process.env.AAD_APP_OAUTH_AUTHORITY_HOST,
   aadAppId: process.env.AAD_APP_CLIENT_ID,
   aadAppClientSecret: process.env.AAD_APP_CLIENT_SECRET,
   appEndpoint: process.env.APP_ENDPOINT,
