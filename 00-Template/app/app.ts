@@ -1,10 +1,10 @@
-import { Application, DefaultTurnState } from '@microsoft/teams-ai';
+import { Application, DefaultTurnState, MessageExtensions } from '@microsoft/teams-ai';
 import { BlobsStorage } from 'botbuilder-azure-blobs';
 import adapter from '../adapter';
 import config from '../config';
 import * as bot from './bots/bot';
-import * as messageExtensions from './messageExtensions/messageExtensions';
 import * as taskModules from './taskModules/taskModules';
+import * as messageExtensions from './messageExtensions/messageExtensions';
 
 interface ConversationState {
     count: number;
@@ -31,5 +31,6 @@ const app = new Application<ApplicationTurnState>({
 
 taskModules.setup(app);
 bot.setup(app);
+messageExtensions.setup(app);
 
 export default app;
