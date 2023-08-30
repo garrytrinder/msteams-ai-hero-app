@@ -1,11 +1,11 @@
 import { Application, Query } from '@microsoft/teams-ai';
 import { ApplicationTurnState } from '../app';
-import { OnBehalfOfCredentialAuthConfig, OnBehalfOfUserCredential, handleMessageExtensionQueryWithSSO } from '@microsoft/teamsfx';
-import config from '../../config';
+import { OnBehalfOfUserCredential, handleMessageExtensionQueryWithSSO } from '@microsoft/teamsfx';
 import { UserListItem } from '../models/cards';
 import { AdaptiveCards } from '@microsoft/adaptivecards-tools';
 import { User } from '@microsoft/microsoft-graph-types';
 import { TurnContext } from 'botbuilder';
+import { loginEndpoint, oboAuthConfig } from '../auth';
 
 const setup = (app: Application<ApplicationTurnState>) => {
 
@@ -13,14 +13,7 @@ const setup = (app: Application<ApplicationTurnState>) => {
         const { queryText } = query.parameters;
         const { count } = query;
 
-        const oboAuthConfig: OnBehalfOfCredentialAuthConfig = {
-            authorityHost: "https://login.microsoftonline.com",
-            tenantId: "common",
-            clientId: config.aadAppId,
-            clientSecret: config.aadAppClientSecret
-        }
         const scopes = ["User.Read.All", "User.Read"];
-        const loginEndpoint = `${config.appEndpoint}/auth-start.html`
 
         const result = await handleMessageExtensionQueryWithSSO(context, oboAuthConfig, loginEndpoint, scopes, async (token) => {
             const credential = new OnBehalfOfUserCredential(token.ssoToken, oboAuthConfig);
@@ -77,4 +70,3 @@ const setup = (app: Application<ApplicationTurnState>) => {
 };
 
 export { setup };
-
