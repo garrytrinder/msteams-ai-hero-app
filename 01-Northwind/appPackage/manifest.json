@@ -5,14 +5,14 @@
     "id": "${{TEAMS_APP_ID}}",
     "packageName": "com.microsoft.teams.appcamp.v3",
     "developer": {
-        "name": "Teams App, Inc.",
+        "name": "Teams App Camp",
         "websiteUrl": "https://www.example.com",
         "privacyUrl": "https://www.example.com/termofuse",
         "termsOfUseUrl": "https://www.example.com/privacy"
     },
     "icons": {
         "color": "Northwind-Logo3-192.png",
-        "outline": "outline.png"
+        "outline": "Northwind-Logo3-32.png"
     },
     "name": {
         "short": "Northwind Customers ${{TEAMSFX_ENV}}",
@@ -41,19 +41,19 @@
             "botId": "${{AAD_APP_CLIENT_ID}}",
             "commands": [
                 {
-                    "id": "personQuery",
+                    "id": "userQuery",
                     "context": [
                         "compose",
                         "commandBox"
                     ],
-                    "description": "Look up a person",
-                    "title": "Person search",
+                    "description": "Look up a user",
+                    "title": "User search",
                     "type": "query",
                     "parameters": [
                         {
                             "name": "queryText",
-                            "title": "Person search",
-                            "description": "Lookup a person",
+                            "title": "User search",
+                            "description": "Lookup a user",
                             "inputType": "text"
                         }
                     ]
