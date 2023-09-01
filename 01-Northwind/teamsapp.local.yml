@@ -62,11 +62,17 @@ deploy:
   - uses: cli/runNpmCommand
     with:
       args: install --no-audit
+  
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./app/pages
+      args: install --no-audit
 
   - uses: file/createOrUpdateEnvironmentFile
     with:
       target: ./.localConfigs
       envs:
+        AAD_APP_OAUTH_AUTHORITY_HOST: ${{AAD_APP_OAUTH_AUTHORITY_HOST}}
         AAD_APP_CLIENT_ID: ${{AAD_APP_CLIENT_ID}}
         AAD_APP_CLIENT_SECRET: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         APP_ENDPOINT: ${{APP_ENDPOINT}}
