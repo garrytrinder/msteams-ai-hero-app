@@ -41,19 +41,19 @@
             "botId": "${{AAD_APP_CLIENT_ID}}",
             "commands": [
                 {
-                    "id": "personQuery",
+                    "id": "userQuery",
                     "context": [
                         "compose",
                         "commandBox"
                     ],
-                    "description": "Look up a person",
-                    "title": "Person search",
+                    "description": "Look up a user",
+                    "title": "User search",
                     "type": "query",
                     "parameters": [
                         {
                             "name": "queryText",
-                            "title": "Person search",
-                            "description": "Lookup a person",
+                            "title": "User search",
+                            "description": "Lookup a user",
                             "inputType": "text"
                         }
                     ]
