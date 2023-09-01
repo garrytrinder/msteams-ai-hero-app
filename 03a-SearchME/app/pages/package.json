@@ -1,0 +1,19 @@
+{
+  "name": "pages",
+  "version": "1.0.0",
+  "description": "",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "dev": "parcel watch src/*.html --dist-dir dist --watch-for-stdin --no-hmr",
+    "build": "parcel build src/*.html --dist-dir lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@microsoft/teams-js": "^2.13.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}
