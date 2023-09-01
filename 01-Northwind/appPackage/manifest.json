@@ -3,7 +3,7 @@
     "manifestVersion": "1.16",
     "version": "1.0.0",
     "id": "${{TEAMS_APP_ID}}",
-    "packageName": "com.microsoft.teams.extension",
+    "packageName": "com.microsoft.teams.appcamp.v3",
     "developer": {
         "name": "Teams App, Inc.",
         "websiteUrl": "https://www.example.com",
@@ -11,18 +11,18 @@
         "termsOfUseUrl": "https://www.example.com/privacy"
     },
     "icons": {
-        "color": "color.png",
+        "color": "Northwind-Logo3-192.png",
         "outline": "outline.png"
     },
     "name": {
-        "short": "msteams-ai-hero-app-${{TEAMSFX_ENV}}",
-        "full": "full name for msteams-ai-hero-app"
+        "short": "Northwind Customers ${{TEAMSFX_ENV}}",
+        "full": "Northwind customer management app"
     },
     "description": {
-        "short": "short description for msteams-ai-hero-app",
-        "full": "full description for msteams-ai-hero-app"
+        "short": "Manage and collaborate to help our valued customers",
+        "full": "This app helps you collaborate with your team to manage our valued customers"
     },
-    "accentColor": "#FFFFFF",
+    "accentColor": "#3690E9",
     "bots": [
         {
             "botId": "${{AAD_APP_CLIENT_ID}}",
