@@ -1,3 +1,7 @@
 # Path to awesome
 
-1. `node scripts/db.js`
+1. While Azurite is running (app running locally)
+
+`node scripts/db.js`
+
+to load the Northwind data into Azurite.
