@@ -16,6 +16,9 @@
     },
     "botDisplayName": {
       "value": "msteams-ai-hero-app-${{RESOURCE_SUFFIX}}"
+    },
+    "aadAppOauthAuthorityHost": {
+      "value": "${{AAD_APP_OAUTH_AUTHORITY_HOST}}"
     }
   }
 }

@@ -62,11 +62,6 @@ deploy:
   - uses: cli/runNpmCommand
     with:
       args: install --no-audit
-  
-  - uses: cli/runNpmCommand
-    with:
-      workingDirectory: ./app/pages
-      args: install --no-audit
 
   - uses: file/createOrUpdateEnvironmentFile
     with:

@@ -38,7 +38,7 @@
           const scopesArray = scope.split(" ");
           const scopesRequest = {
             scopes: scopesArray,
-            redirectUri: window.location.origin + `/auth-end.html?clientId=${clientId}`,
+            redirectUri: window.location.origin + `/auth/auth-end.html?clientId=${clientId}`,
             loginHint: loginHint
           };
           await msalInstance.loginRedirect(scopesRequest);

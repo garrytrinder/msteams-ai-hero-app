@@ -8,14 +8,22 @@
     "author": "Microsoft",
     "license": "MIT",
     "main": "./lib/server.js",
+    "targets": {
+        "main": false
+    },
+    "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {
-        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+        "build": "npm run clean && npm run build:tsc && npm run build:parcel",
+        "build:parcel": "parcel build ./app/pages/**/*.html --dist-dir ./lib/app/pages",
+        "build:tsc": "tsc --build",
+        "clean": "rimraf ./lib && rimraf ./dist && rimraf ./.parcel-cache",
         "dev": "nodemon --exec node --ignore _storage_emulator/ --inspect=9239 --signal SIGINT -r ts-node/register ./server.ts",
-        "build": "tsc --build && cd app/pages && npm run build && cd ../../scripts && node copy.js",
-        "start": "node ./lib/server.js",
+        "dev:parcel": "parcel watch ./app/pages/**/*.html --dist-dir ./dist",
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
         "storage": "azurite --silent --location ./_storage_emulator --debug ./_storage_emulator/debug.log",
         "watch": "nodemon --exec \"npm run start\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./lib/server.js"
     },
     "repository": {
         "type": "git",
@@ -24,6 +32,7 @@
     "dependencies": {
         "@microsoft/adaptivecards-tools": "^1.0.0",
         "@microsoft/teams-ai": "^0.1.0-preview.2",
+        "@microsoft/teams-js": "^2.14.0",
         "@microsoft/teamsfx": "^2.2.2",
         "botbuilder": "^4.17.0",
         "botbuilder-azure-blobs": "^4.20.0",
@@ -35,8 +44,11 @@
         "@types/node": "^14.0.0",
         "@types/restify": "^8.5.5",
         "azurite": "^3.25.1",
+        "concurrently": "^8.2.1",
         "env-cmd": "^10.1.0",
         "nodemon": "^2.0.7",
+        "parcel": "^2.9.3",
+        "rimraf": "^5.0.1",
         "shx": "^0.3.3",
         "ts-node": "^10.4.0",
         "typescript": "^4.4.4"

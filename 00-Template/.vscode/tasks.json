@@ -82,10 +82,10 @@
         {
             "label": "Start parcel",
             "type": "shell",
-            "command": "npm run dev",
+            "command": "npm run dev:parcel",
             "isBackground": true,
             "options": {
-                "cwd": "${workspaceFolder}/app/pages"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": {
                 "pattern": [
