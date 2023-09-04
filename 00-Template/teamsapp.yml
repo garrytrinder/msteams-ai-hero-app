@@ -39,7 +39,7 @@ provision:
   - uses: aadApp/update
     with:
       manifestPath: "./aad.manifest.json"
-      outputFilePath : "./build/aad.manifest.${{TEAMSFX_ENV}}.json"
+      outputFilePath: "./build/aad.manifest.${{TEAMSFX_ENV}}.json"
 
   - uses: teamsApp/validateManifest
     with:
@@ -77,7 +77,6 @@ deploy:
       ignoreFile: .webappignore
       resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
 
-
 publish:
 
   - uses: teamsApp/validateManifest
@@ -103,5 +102,4 @@ publish:
       appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
     writeToEnvironmentFile:
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-
-projectId: 058441c6-217e-4611-aed7-00ad9d2b9cd3
+projectId: c3d92e60-4723-479e-947f-07b7bdc2a79b
