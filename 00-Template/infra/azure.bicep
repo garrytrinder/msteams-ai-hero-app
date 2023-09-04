@@ -20,6 +20,7 @@ param webAppName string = resourceBaseName
 param location string = resourceGroup().location
 param storageAccountName string = resourceBaseName
 param blobContainerName string = 'state'
+param aadAppOauthAuthorityHost string
 
 // create azure storage account
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
@@ -88,6 +89,10 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'BLOB_STORAGE_CONTAINER_NAME'
           value: blobContainerName
+        }
+        {
+          name: 'AAD_APP_OAUTH_AUTHORITY_HOST'
+          value: aadAppOauthAuthorityHost
         }
       ]
       ftpsState: 'FtpsOnly'

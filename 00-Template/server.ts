@@ -19,11 +19,16 @@ server.post("/api/messages", postMessages);
 server.get("/api/config", getConfig);
 server.post("/api/profile", postProfile);
 
+let pagesDirectory = `${__dirname}/app/pages`;
+if (process.env.NODE_ENV !== "production") {
+  pagesDirectory = `${__dirname}/dist`;
+}
+
 // Serve static tab files
 server.get(
   "/*",
   restify.plugins.serveStatic({
-    directory: `${__dirname}/app/pages/dist`,
+    directory: pagesDirectory
   })
 );
 
