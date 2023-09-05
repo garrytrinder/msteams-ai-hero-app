@@ -94,11 +94,15 @@
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{APP_ENDPOINT}}/auth-end.html",
+            "url": "https://token.botframework.com/.auth/web/redirect",
             "type": "Web"
         },
         {
-            "url": "${{APP_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
+            "url": "${{APP_ENDPOINT}}/auth/auth-end.html",
+            "type": "Web"
+        },
+        {
+            "url": "${{APP_ENDPOINT}}/auth/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
             "type": "Spa"
         }
     ]

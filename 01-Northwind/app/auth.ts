@@ -30,4 +30,4 @@ export const oboAuthConfig: OnBehalfOfCredentialAuthConfig = {
     tenantId: "common"
 }
 
-export const loginEndpoint = `${config.appEndpoint}/auth-start.html`;
+export const loginEndpoint = `${config.appEndpoint}/auth/auth-start.html`;

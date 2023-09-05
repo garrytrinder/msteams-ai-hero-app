@@ -4,10 +4,3 @@
 
 2. Copy /env/.env.local.user.sample to /env/.env.local.sample
 
-3. Install packages in the /app/pages folder
-
-```shell
-cd app/pages
-npm install
-cd ../..
-```
