@@ -1,5 +1,4 @@
 {
-  "exclude": ["app/pages/**/*"],
   "compilerOptions": {
     "declaration": true,
     "target": "es2017",
