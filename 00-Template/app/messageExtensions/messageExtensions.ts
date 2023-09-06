@@ -1,4 +1,4 @@
-import { Application, Query } from '@microsoft/teams-ai';
+import { Application } from '@microsoft/teams-ai';
 import { ApplicationTurnState } from '../app';
 import * as userME from './userME';
 
