@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== "production") {
   pagesDirectory = `${__dirname}/dist`;
 }
 
-// Serve static tab files
+// Serve pages
 server.get(
   "/*",
   restify.plugins.serveStatic({

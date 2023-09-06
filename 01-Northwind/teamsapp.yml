@@ -38,8 +38,8 @@ provision:
 
   - uses: aadApp/update
     with:
-      manifestPath: "./aad.manifest.json"
-      outputFilePath : "./build/aad.manifest.${{TEAMSFX_ENV}}.json"
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
 
   - uses: teamsApp/validateManifest
     with:
@@ -71,12 +71,16 @@ deploy:
     with:
       args: run build --if-present
 
+  - uses: cli/runNpxCommand
+    name: build pages
+    with:
+      args: parcel build 'app/pages/**/*.html' --dist-dir ./lib/app/pages
+
   - uses: azureAppService/zipDeploy
     with:
       artifactFolder: .
       ignoreFile: .webappignore
       resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
-
 
 publish:
 
