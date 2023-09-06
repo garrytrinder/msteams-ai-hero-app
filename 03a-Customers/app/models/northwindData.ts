@@ -4,15 +4,23 @@ import {
 
 import { TableClient } from "@azure/data-tables";
 import config from "../../config";
+import { start } from 'repl';
+
+// NOTE: We're force fitting a relational database into a non-relational database so please
+// forgive the inefficiencies. This is just for demonstration purposes.
 
 //#region Customers --------------------------------------------------------------------------------------
 
-export const getCustomers = async (): Promise<Customer[]> => {
+export const getCustomers = async (startsWith: string): Promise<Customer[]> => {
     const tableClient = TableClient.fromConnectionString(config.tableConnectionString, TABLE_NAME.CUSTOMER);
+
     const entities = tableClient.listEntities();
+
     let result = [];
     for await (const entity of entities) {
-        result.push(entity);
+        if (startsWith && (entity.CompanyName as string).toLowerCase().startsWith(startsWith.toLowerCase())) {
+            result.push(entity);
+        }
     }
     return result;
 };

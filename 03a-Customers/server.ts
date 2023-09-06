@@ -9,6 +9,7 @@ const server = restify.createServer();
 
 // parse request body
 server.use(restify.plugins.bodyParser());
+server.use(restify.plugins.queryParser());
 
 // start server
 server.listen(process.env.port || process.env.PORT || 3978, () => {

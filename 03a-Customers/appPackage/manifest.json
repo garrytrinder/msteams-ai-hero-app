@@ -41,6 +41,24 @@
             "botId": "${{AAD_APP_CLIENT_ID}}",
             "commands": [
                 {
+                    "id": "customerQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Look up a Northwind customer",
+                    "title": "Customer search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "queryText",
+                            "title": "Customer search",
+                            "description": "Lookup a Northwind customer",
+                            "inputType": "text"
+                        }
+                    ]
+                },
+                {
                     "id": "userQuery",
                     "context": [
                         "compose",

@@ -2,7 +2,8 @@ import { Customer } from "../models/db";
 import * as NorthwindData from "../models/northwindData";
 
 export const getCustomers = async (req, res) => {
-    const customers = await NorthwindData.getCustomers();
+    const startsWith = req.query.startsWith as string;
+    const customers = await NorthwindData.getCustomers(startsWith);
     res.send(customers);
 };
 
