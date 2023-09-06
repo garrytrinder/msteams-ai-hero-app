@@ -71,6 +71,11 @@ deploy:
     with:
       args: run build --if-present
 
+  - uses: cli/runNpxCommand
+    name: build pages
+    with:
+      args: parcel build 'app/pages/**/*.html' --dist-dir ./lib/app/pages
+
   - uses: azureAppService/zipDeploy
     with:
       artifactFolder: .

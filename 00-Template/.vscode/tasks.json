@@ -82,7 +82,7 @@
         {
             "label": "Start parcel",
             "type": "shell",
-            "command": "npm run dev:parcel",
+            "command": "npx parcel watch 'app/pages/**/*.html'",
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
