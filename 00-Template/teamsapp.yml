@@ -38,8 +38,8 @@ provision:
 
   - uses: aadApp/update
     with:
-      manifestPath: "./aad.manifest.json"
-      outputFilePath: "./build/aad.manifest.${{TEAMSFX_ENV}}.json"
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
 
   - uses: teamsApp/validateManifest
     with:
